@@ -2,22 +2,22 @@
 // returns the sum of those numbers.
 
 function sum(numbers) {
-  var output = 0;
-  for (var number of numbers) {
-    output += number;
-  }
-  return output;
+    var output = 0;
+    for (var number of numbers) {
+        output += number;
+    }
+    return output;
 }
 
 // 2. Create a function called "average" that takes an array of numbers
 // and returns the average of those numbers.
 
 function average(numbers) {
-  if (numbers.length === 0) {
-    return;
-  }
+    if (numbers.length === 0) {
+        return;
+    }
 
-  return sum(numbers) / numbers.length;
+    return sum(numbers) / numbers.length;
 }
 
 // 3. Create a function called "intersection" that takes two arrays and
@@ -26,29 +26,29 @@ function average(numbers) {
 // in the returned array, even if they were in the input.
 
 function intersection(array1, array2) {
-  var output = [];
-  for (var current of array1) {
-    for (var number of array2) {
-      if (current === number) {
-        output.push(current);
-        break;
-      }
+    var output = [];
+    for (var current of array1) {
+        for (var number of array2) {
+            if (current === number) {
+                output.push(current);
+                break;
+            }
+        }
     }
-  }
-  return output;
+    return output;
 }
 
 // 4. Create a function called "minimum" that takes an array of numbers and
 // returns the smallest number in that array.
 
 function minimum(numbers) {
-  var min = numbers[0];
-  for (var number of numbers) {
-    if (number < min) {
-      min = number;
+    var min = numbers[0];
+    for (var number of numbers) {
+        if (number < min) {
+            min = number;
+        }
     }
-  }
-  return min;
+    return min;
 }
 
 // 5. There are many techniques to sort arrays in programming. Your programming
@@ -76,22 +76,12 @@ function minimum(numbers) {
 // to see how. This may make more sense to you.
 
 function selectionSort(numbers) {
-  var output = numbers.slice(0);
-  for (var i = 0; i < output.length; i++) {
-    var min = output[i];
-    var minIndex = i;
-    for (var j = i; j < output.length; j++) {
-      var number = output[j];
-      if (number < min) {
-        min = number;
-        minIndex = j;
-      }
+    for (var i = 0; i < numbers.length; i++) {
+        var min = minimum(numbers.slice(i, numbers.length));
+        numbers[numbers.indexOf(min)] = numbers[i];
+        numbers[i] = min;
     }
-    output[minIndex] = output[i];
-    output[i] = min;
-    console.log(output);
-  }
-  return output;
+    return numbers;
 }
 
 // 6. Create a function called "createUser" that takes a name and a Date object
@@ -99,10 +89,10 @@ function selectionSort(numbers) {
 // those values.
 
 function createUser(name, birthDate) {
-  return {
-    name: name,
-    dob: birthDate
-  };
+    return {
+        name: name,
+        dob: birthDate
+    };
 }
 
 // 7. Create a function called "calculateAge" that takes a user created from
@@ -110,29 +100,29 @@ function createUser(name, birthDate) {
 // age in years on that date. You can use your code from yesterday's homework.
 
 function calculateAge(user, currentDate) {
-  var birthDate = user.dob;
+    var birthDate = user.dob;
 
-  if (currentDate === undefined) {
-    currentDate = new Date();
-  }
+    if (currentDate === undefined) {
+        currentDate = new Date();
+    }
 
-  if (birthDate > currentDate) {
-    return;
-  }
+    if (birthDate > currentDate) {
+        return;
+    }
 
-  var age = currentDate.getFullYear() - birthDate.getFullYear();
-  var currentMonth = currentDate.getMonth();
-  var birthMonth = birthDate.getMonth();
+    var age = currentDate.getFullYear() - birthDate.getFullYear();
+    var currentMonth = currentDate.getMonth();
+    var birthMonth = birthDate.getMonth();
 
-  if (currentMonth < birthMonth) {
-    return age - 1;
-  } else if (currentMonth > birthMonth) {
-    return age;
-  } else if (currentDate.getDate() < birthDate.getDate()) {
-    return age - 1;
-  } else {
-    return age;
-  }
+    if (currentMonth < birthMonth) {
+        return age - 1;
+    } else if (currentMonth > birthMonth) {
+        return age;
+    } else if (currentDate.getDate() < birthDate.getDate()) {
+        return age - 1;
+    } else {
+        return age;
+    }
 }
 
 // 8. Create a function called "addAge" that takes a user created from createUser
@@ -140,7 +130,7 @@ function calculateAge(user, currentDate) {
 // in years the user was on that date.
 
 function addAge(user, currentDate) {
-  user.age = calculateAge(user, currentDate);
+    user.age = calculateAge(user, currentDate);
 }
 
 // 9. Create a function called "createUsers" that takes two arrays of equal
@@ -148,18 +138,17 @@ function addAge(user, currentDate) {
 // birth, and returns a new array of objects created from those original arrays.
 
 function createUsers(names, birthDates) {
-  if (names.length !== birthDates.length) {
-    return;
-  }
+    if (names.length !== birthDates.length) {
+        return;
+    }
 
-  var output = [];
+    var output = [];
 
-  for (var idx = 0; idx < names.length; idx++) {
-    output.push(createUser(names[idx], birthDates[idx]));
-  }
-  return output;
+    for (var idx = 0; idx < names.length; idx++) {
+        output.push(createUser(names[idx], birthDates[idx]));
+    }
+    return output;
 }
-
 
 // 10. Create a function called "averageAge" that takes an array of users and
 // a Date object and returns the average age in years of the users on that date.
@@ -167,10 +156,10 @@ function createUsers(names, birthDates) {
 // a user's date of birth.
 
 function averageAge(users, currentDate) {
-  var ages = [];
-  for (var user of users) {
-    ages.push(calculateAge(user, currentDate));
-  }
+    var ages = [];
+    for (var user of users) {
+        ages.push(calculateAge(user, currentDate));
+    }
 
-  return average(ages);
+    return average(ages);
 }
