@@ -28,11 +28,8 @@ function average(numbers) {
 function intersection(array1, array2) {
     var output = [];
     for (var current of array1) {
-        for (var number of array2) {
-            if (current === number) {
-                output.push(current);
-                break;
-            }
+        if (array2.includes(current) && !output.includes(current)) {
+            output.push(current);
         }
     }
     return output;
